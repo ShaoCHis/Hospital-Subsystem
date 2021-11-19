@@ -5,7 +5,11 @@ package com.example.sebackend.views;/**
  */
 
 import com.example.sebackend.model.Doctor;
+import com.example.sebackend.model.Schedule;
 import lombok.Data;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * author ShaoCHi
@@ -27,6 +31,8 @@ public class DoctorInfo {
 
   private Integer cost;
 
+  List<ScheduleInfo> scheduleInfoList;
+
   public DoctorInfo(Doctor doctor){
     this.introduction=doctor.getIntroduction();
     this.Id=doctor.getId();
@@ -34,5 +40,6 @@ public class DoctorInfo {
     this.cost=doctor.getAge();
     this.title=doctor.getTitle();
     this.name=doctor.getName();
+    this.scheduleInfoList=new LinkedList<>();
   }
 }

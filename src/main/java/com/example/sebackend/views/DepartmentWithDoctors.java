@@ -5,8 +5,10 @@ package com.example.sebackend.views;/**
  */
 
 
+import com.example.sebackend.model.Department;
 import lombok.Data;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -24,4 +26,11 @@ public class DepartmentWithDoctors {
   private String introduction;
 
   private List<DoctorInfo> doctorList;
+
+  public DepartmentWithDoctors(Department department){
+    this.Id=department.getId();
+    this.name=department.getName();
+    this.introduction=department.getIntroduction();
+    this.doctorList=new LinkedList<>();
+  }
 }

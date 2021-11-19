@@ -6,8 +6,10 @@ package com.example.sebackend.views;
  */
 
 import com.example.sebackend.model.Department;
+import com.example.sebackend.model.Hospital;
 import lombok.Data;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -42,4 +44,19 @@ public class HospitalInfo {
   private List<DepartmentWithDoctors> departmentWithDoctors;
 
   private Integer status;
+
+  public HospitalInfo(Hospital hospital){
+    this.Id=hospital.getId();
+    this.password=hospital.getPassword();
+    this.code=hospital.getCode();
+    this.name=hospital.getName();
+    this.introduction=hospital.getIntroduction();
+    this.image=hospital.getImage();
+    this.url=hospital.getUrl();
+    this.level=hospital.getLevel();
+    this.location=hospital.getLocation();
+    this.notice=hospital.getNotice();
+    this.status=1;
+    this.departmentWithDoctors=new LinkedList<>();
+  }
 }

@@ -6,6 +6,7 @@ package com.example.sebackend.model;
  */
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * author ShaoCHi
@@ -36,6 +37,17 @@ public class Doctor {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "department")
   private Department department;
+
+  @OneToMany(mappedBy = "doctor",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+  Set<Schedule> scheduleSet;
+
+  public Set<Schedule> getScheduleSet() {
+    return scheduleSet;
+  }
+
+  public void setScheduleSet(Set<Schedule> scheduleSet) {
+    this.scheduleSet = scheduleSet;
+  }
 
   public String getId() {
     return Id;
