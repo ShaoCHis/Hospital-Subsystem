@@ -30,8 +30,8 @@ public class FinanceService {
   private HospitalRepository hospitalRepository;
 
   public Result<String> updateEconomy(Economy body) {
-    Optional<Finance> financeOptional=financeRepository.findById(body.getId());
-    if(!financeOptional.isPresent()||hospitalRepository.findById(body.getId()).get().getStatus()==0)
+    Optional<Finance> financeOptional=financeRepository.findById(body.getHospitalId());
+    if(!financeOptional.isPresent()||hospitalRepository.findById(body.getHospitalId()).get().getStatus()==0)
       return Result.wrapErrorResult(new HospitalNotExistedError());
     financeOptional.get().setEconomy(financeOptional.get().getEconomy()+body.getEconomy());
     financeRepository.save(financeOptional.get());

@@ -6,17 +6,20 @@ package com.example.sebackend.service;/**
 
 import com.example.sebackend.error.HospitalAlreadyJoinedError;
 import com.example.sebackend.error.HospitalNotExistedError;
+import com.example.sebackend.error.PatientNotExistedError;
 import com.example.sebackend.model.*;
 import com.example.sebackend.repository.HospitalRepository;
+import com.example.sebackend.repository.PatientRepository;
+import com.example.sebackend.request.Economy;
 import com.example.sebackend.utils.Result;
-import com.example.sebackend.views.DepartmentWithDoctors;
-import com.example.sebackend.views.DoctorInfo;
-import com.example.sebackend.views.HospitalInfo;
-import com.example.sebackend.views.ScheduleInfo;
+import com.example.sebackend.views.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.print.Doc;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.*;
 import java.util.Optional;
 import java.util.Set;
 
@@ -32,6 +35,9 @@ public class HospitalService {
   @Autowired
   private HospitalRepository hospitalRepository;
 
+  @Autowired
+  private PatientRepository patientRepository;
+
   public Result<HospitalInfo> getHospitalInfo(String id) {
     Optional<Hospital> hospitalOption=hospitalRepository.findById(id);
     if(!hospitalOption.isPresent()){
@@ -43,6 +49,13 @@ public class HospitalService {
     hospitalOption.get().setStatus(1);
     hospitalRepository.save(hospitalOption.get());
     Set<Department> departmentSet=hospitalOption.get().getDepartmentSet();
+    /**
+     * 将患者就诊卡信息加入返回内容
+     */
+    Set<Patient> patientSet=hospitalOption.get().getPatientSet();
+    for(Patient patient:patientSet){
+      hospitalInfo.getPatientInfoList().add(new PatientInfo(patient));
+    }
     /**
      * 将科室与医生信息加入返回内容
      */
@@ -66,5 +79,16 @@ public class HospitalService {
       }
     }
     return Result.wrapSuccessfulResult(hospitalInfo);
+  }
+
+  public Result<String> updatePatient(Economy body) {
+    Optional<Patient> patientOptional=patientRepository.findById(body.getId());
+    if(!patientOptional.isPresent())
+      return Result.wrapErrorResult(new PatientNotExistedError());
+    if(patientOptional.get().getHospital().getId()!= hospitalRepository.findById(body.getHospitalId()).get().getId())
+      return Result.wrapErrorResult(new PatientNotExistedError());
+    patientOptional.get().setBalance(patientOptional.get().getBalance()-body.getEconomy());
+    patientRepository.save(patientOptional.get());
+    return Result.wrapSuccessfulResult("updateSuccess!");
   }
 }

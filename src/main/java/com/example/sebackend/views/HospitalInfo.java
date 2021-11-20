@@ -45,6 +45,8 @@ public class HospitalInfo {
 
   private Integer status;
 
+  private List<PatientInfo> patientInfoList;
+
   public HospitalInfo(Hospital hospital){
     this.Id=hospital.getId();
     this.password=hospital.getPassword();
@@ -58,5 +60,6 @@ public class HospitalInfo {
     this.notice=hospital.getNotice();
     this.status=1;
     this.departmentWithDoctors=new LinkedList<>();
+    this.patientInfoList=new LinkedList<>();
   }
 }

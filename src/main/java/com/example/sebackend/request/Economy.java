@@ -16,5 +16,7 @@ import lombok.Data;
 public class Economy {
   private String id;
 
+  private String hospitalId;
+
   private Integer economy;
 }

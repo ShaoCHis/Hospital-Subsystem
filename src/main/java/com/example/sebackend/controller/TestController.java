@@ -7,11 +7,16 @@ package com.example.sebackend.controller;
 
 import com.example.sebackend.model.*;
 import com.example.sebackend.service.*;
+import com.example.sebackend.utils.OkhttpApi;
 import com.example.sebackend.utils.Result;
+import com.example.sebackend.views.HospitalInfo;
+import okhttp3.OkHttpClient;
+import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller // This means that this class is a Controller

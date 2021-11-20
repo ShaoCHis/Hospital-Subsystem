@@ -4,13 +4,12 @@ package com.example.sebackend.controller;/**
  * Tongji University
  */
 
+import com.example.sebackend.request.Economy;
 import com.example.sebackend.service.HospitalService;
 import com.example.sebackend.utils.Result;
 import com.example.sebackend.views.HospitalInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.swing.text.html.Option;
 
 /**
  * author ShaoCHi
@@ -29,5 +28,11 @@ public class HospitalController {
   public @ResponseBody
   Result<HospitalInfo> getHospitalInfo (@PathVariable String id) {
     return  hospitalService.getHospitalInfo(id);
+  }
+
+  @PostMapping(path="/updatePatient")
+  public
+  Result<String> updatePatient(@RequestBody Economy body){
+    return hospitalService.updatePatient(body);
   }
 }
