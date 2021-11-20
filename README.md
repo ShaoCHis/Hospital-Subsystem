@@ -22,7 +22,20 @@ content-type:application/json
 Accept: application/json
 
 {
-  "id": "1",
+  "hospitalId": "1",
+  "economy": 100
+}
+```
+
+```
+//对患者就诊卡余额进行更新
+POST http://139.196.194.51:18080/api/hospitals/updatePatient
+content-type:application/json
+Accept: application/json
+
+{
+  "id":"100"
+  "hospitalId": "1",
   "economy": 100
 }
 ```
