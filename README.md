@@ -1,2 +1,41 @@
 # Hospital-Subsystem
 WEB&amp;SOA Hospital Subsystem
+
+### API调用示例
+```
+GET http://139.196.194.51:18080/api/tests/getTest/1
+content-type:application-json
+Accept: application/json
+```
+
+```
+//获得医院的总信息
+GET http://139.196.194.51:18080/api/hospitals/1
+content-type:application/json
+Accept: application/json
+```
+
+```
+//对医院财务进行更新
+POST http://139.196.194.51:18080/api/finance
+content-type:application/json
+Accept: application/json
+
+{
+  "hospitalId": "1",
+  "economy": 100
+}
+```
+
+```
+//对患者就诊卡余额进行更新
+POST http://139.196.194.51:18080/api/hospitals/updatePatient
+content-type:application/json
+Accept: application/json
+
+{
+  "id":"100"
+  "hospitalId": "1",
+  "economy": 100
+}
+```
