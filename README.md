@@ -1,6 +1,18 @@
 # Hospital-Subsystem
 WEB&amp;SOA Hospital Subsystem
 
+#### 患者信息与医院对应
+```
+患者信息与医院对应
+```
+
+#### 患者卡类型type
+```
+就诊卡----------0
+医保卡----------1
+社保卡----------2
+```
+
 ### API调用示例
 ```
 GET http://139.196.194.51:18080/api/tests/getTest/1
