@@ -30,6 +30,11 @@ public class HospitalController {
     return  hospitalService.getHospitalInfo(id);
   }
 
+  @GetMapping(path = "/updateInfo/{id}")
+  Result<HospitalInfo> updateHospitalInfo(@PathVariable String id){
+    return hospitalService.updateHospitalInfo(id);
+  }
+
   @PostMapping(path="/updatePatient")
   public
   Result<String> updatePatient(@RequestBody Economy body){

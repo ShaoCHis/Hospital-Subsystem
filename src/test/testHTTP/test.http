@@ -20,3 +20,9 @@ Accept: application/json
   "id": "1",
   "economy": 100
 }
+
+###
+//更新医院信息
+GET localhost:18080/api/hospitals/updateInfo/1
+content-type:application/json
+Accept: application/json

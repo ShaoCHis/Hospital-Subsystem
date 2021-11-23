@@ -7,12 +7,12 @@ import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
 @SpringBootApplication
-public class SEbackEndApplication {
+public class SubsystemApplication {
   @PostConstruct
   public void setDefaultTimezone() {
     TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
   }
   public static void main(String[] args) {
-    SpringApplication.run(SEbackEndApplication.class, args);
+    SpringApplication.run(SubsystemApplication.class, args);
   }
 }

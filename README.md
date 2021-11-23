@@ -21,7 +21,7 @@ Accept: application/json
 ```
 
 ```
-//获得医院的总信息
+//获得医院的总信息,加入系统（仅可进行操作一次）
 GET http://139.196.194.51:18080/api/hospitals/1
 content-type:application/json
 Accept: application/json
@@ -50,4 +50,11 @@ Accept: application/json
   "hospitalId": "1",
   "economy": 100
 }
+```
+
+```
+//对医院信息进行更新（测试的时候用该接口获得医院信息进行测试）
+GET http://139.196.194.51:18080/api/hospitals/updateInfo
+content-type:application/json
+Accept: application/json
 ```

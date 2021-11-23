@@ -91,4 +91,44 @@ public class HospitalService {
     patientRepository.save(patientOptional.get());
     return Result.wrapSuccessfulResult("updateSuccess!");
   }
+
+    public Result<HospitalInfo> updateHospitalInfo(String id) {
+      Optional<Hospital> hospitalOption=hospitalRepository.findById(id);
+      if(hospitalOption.get().getStatus()==0||!hospitalOption.isPresent()){
+        return Result.wrapErrorResult(new HospitalNotExistedError());
+      }
+      HospitalInfo hospitalInfo=new HospitalInfo(hospitalOption.get());
+      hospitalRepository.save(hospitalOption.get());
+      Set<Department> departmentSet=hospitalOption.get().getDepartmentSet();
+      /**
+       * 将患者就诊卡信息加入返回内容
+       */
+      Set<Patient> patientSet=hospitalOption.get().getPatientSet();
+      for(Patient patient:patientSet){
+        hospitalInfo.getPatientInfoList().add(new PatientInfo(patient));
+      }
+      /**
+       * 将科室与医生信息加入返回内容
+       */
+      for(Department department:departmentSet){
+        hospitalInfo.getDepartmentWithDoctors().add(new DepartmentWithDoctors(department));
+      }
+      /**
+       * 将医生与科室对应加入相应返回内容
+       */
+      Set<Doctor> doctorSet=hospitalOption.get().getDoctorSet();
+      for(DepartmentWithDoctors departmentWithDoctors:hospitalInfo.getDepartmentWithDoctors()){
+        for(Doctor doctor:doctorSet){
+          if(doctor.getDepartment().getId()==departmentWithDoctors.getId()) {
+            DoctorInfo doctorInfo=new DoctorInfo(doctor);
+            Set<Schedule> scheduleSet=doctor.getScheduleSet();
+            for(Schedule schedule:scheduleSet){
+              doctorInfo.getScheduleInfoList().add(new ScheduleInfo(schedule));
+            }
+            departmentWithDoctors.getDoctorList().add(doctorInfo);
+          }
+        }
+      }
+      return Result.wrapSuccessfulResult(hospitalInfo);
+    }
 }
