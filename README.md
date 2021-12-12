@@ -58,3 +58,8 @@ GET http://139.196.194.51:18080/api/hospitals/updateInfo
 content-type:application/json
 Accept: application/json
 ```
+
+###对操作进行编码处理
+```
+
+```

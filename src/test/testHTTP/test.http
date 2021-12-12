@@ -5,7 +5,7 @@ Accept: application/json
 ###
 
 //获得医院的总信息
-GET localhost:18080/api/hospitals/1
+GET 139.196.194.51:18080/api/hospitals/1
 content-type:application/json
 Accept: application/json
 
