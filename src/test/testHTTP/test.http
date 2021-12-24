@@ -1,4 +1,4 @@
-GET localhost:18080/api/tests/getTest/1
+GET http://139.196.194.51:18080/api/tests/getTest/1
 content-type:application-json
 Accept: application/json
 

@@ -10,6 +10,7 @@ import com.example.sebackend.error.PatientNotExistedError;
 import com.example.sebackend.model.*;
 import com.example.sebackend.repository.HospitalRepository;
 import com.example.sebackend.repository.PatientRepository;
+import com.example.sebackend.repository.ReservationRepository;
 import com.example.sebackend.request.Economy;
 import com.example.sebackend.utils.Result;
 import com.example.sebackend.views.*;
@@ -38,6 +39,9 @@ public class HospitalService {
   @Autowired
   private PatientRepository patientRepository;
 
+  @Autowired
+  private ReservationRepository reservationRepository;
+
   public Result<HospitalInfo> getHospitalInfo(String id) {
     Optional<Hospital> hospitalOption=hospitalRepository.findById(id);
     if(!hospitalOption.isPresent()){
@@ -46,7 +50,7 @@ public class HospitalService {
     if(hospitalOption.get().getStatus()==1)
       return Result.wrapErrorResult(new HospitalAlreadyJoinedError());
     HospitalInfo hospitalInfo=new HospitalInfo(hospitalOption.get());
-    hospitalOption.get().setStatus(1);
+//    hospitalOption.get().setStatus(1);
     hospitalRepository.save(hospitalOption.get());
     Set<Department> departmentSet=hospitalOption.get().getDepartmentSet();
     /**
@@ -84,8 +88,6 @@ public class HospitalService {
   public Result<String> updatePatient(Economy body) {
     Optional<Patient> patientOptional=patientRepository.findById(body.getId());
     if(!patientOptional.isPresent())
-      return Result.wrapErrorResult(new PatientNotExistedError());
-    if(patientOptional.get().getHospital().getId()!= hospitalRepository.findById(body.getHospitalId()).get().getId())
       return Result.wrapErrorResult(new PatientNotExistedError());
     patientOptional.get().setBalance(patientOptional.get().getBalance()-body.getEconomy());
     patientRepository.save(patientOptional.get());
@@ -131,4 +133,33 @@ public class HospitalService {
       }
       return Result.wrapSuccessfulResult(hospitalInfo);
     }
+
+  public Result<String> updateReservation(Reservations body) {
+    Optional<Hospital> patientOptional=hospitalRepository.findById(body.getHospitalId());
+    if(!patientOptional.isPresent())
+      return Result.wrapErrorResult(new PatientNotExistedError());
+    Reservation reservation=new Reservation();
+    reservation.setHospital(patientOptional.get());
+    reservation.setDepartmentName(body.getDepartmentName());
+    reservation.setDoctorName(body.getDoctorName());
+    reservation.setReserveDate(body.getReserveDate());
+    reservation.setReserveTime(body.getReserveTime());
+    reservation.setPatientId(body.getPatientId());
+    reservation.setPatientName(body.getPatientName());
+    reservationRepository.save(reservation);
+    return Result.wrapSuccessfulResult("Success!");
+  }
+
+  public Result<String> cancelReservation(CancelReservation body) {
+    Optional<Hospital> patientOptional=hospitalRepository.findById(body.getHospitalId());
+    if(!patientOptional.isPresent())
+      return Result.wrapErrorResult(new PatientNotExistedError());
+    Reservation reservation=reservationRepository.findByCancel(body);
+    if(reservation!=null){
+      reservationRepository.delete(reservation);
+      return Result.wrapSuccessfulResult("Cancel Success!");
+    }else{
+      return Result.wrapErrorResult("No such reservation!");
+    }
+  }
 }

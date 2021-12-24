@@ -4,12 +4,18 @@ package com.example.sebackend.controller;/**
  * Tongji University
  */
 
+import com.example.sebackend.model.Hospital;
+import com.example.sebackend.model.Reservation;
 import com.example.sebackend.request.Economy;
 import com.example.sebackend.service.HospitalService;
 import com.example.sebackend.utils.Result;
+import com.example.sebackend.views.CancelReservation;
 import com.example.sebackend.views.HospitalInfo;
+import com.example.sebackend.views.Reservations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 /**
  * author ShaoCHi
@@ -39,5 +45,15 @@ public class HospitalController {
   public
   Result<String> updatePatient(@RequestBody Economy body){
     return hospitalService.updatePatient(body);
+  }
+
+  @PostMapping(path = "/updateReservation")
+  public Result<String> updateReservation(@RequestBody Reservations body){
+    return hospitalService.updateReservation(body);
+  }
+
+  @PostMapping(path = "/cancelReservatio")
+  public Result<String> cancelReservation(@RequestBody CancelReservation body){
+    return hospitalService.cancelReservation(body);
   }
 }

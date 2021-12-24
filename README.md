@@ -40,6 +40,13 @@ Accept: application/json
 ```
 
 ```
+//获取患者就诊卡余额
+GET http://139.196.194.51:18080/api/patients/{id}
+content-type:application/json
+Accept:application/json
+```
+
+```
 //对患者就诊卡余额进行更新
 POST http://139.196.194.51:18080/api/hospitals/updatePatient
 content-type:application/json
@@ -47,7 +54,6 @@ Accept: application/json
 
 {
   "id":"100"
-  "hospitalId": "1",
   "economy": 100
 }
 ```
@@ -59,7 +65,37 @@ content-type:application/json
 Accept: application/json
 ```
 
-###对操作进行编码处理
+```
+//更新预约信息
+Post http://139.196.194.51:18080/api/hospitals/updateReservation
+content-type:application/json
+Accept:application/json
+
+{
+    "departmentName":"",
+    "doctorName":"",
+    "patientId":"",
+    "patientName":"",
+    "reserveDate":"",
+    "reserveTime":"".
+    "hospitalId":""
+    "number":""
+}
 ```
 
+```
+Post http://139.196.194.51:18080/api/hospitals/cancelReservation
+content-type:application/json
+Accept:application/json
+
+{
+    "hospitalId":"",
+    "patientId":"",
+    "reserveDate":"",
+    "reserveTime":""
+}
+```
+
+###对操作进行编码处理
+```
 ```

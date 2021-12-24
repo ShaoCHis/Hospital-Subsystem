@@ -49,6 +49,17 @@ public class Hospital {
   @OneToMany(mappedBy = "hospital",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
   Set<Patient> patientSet;
 
+  @OneToMany(mappedBy = "hospital",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+  Set<Reservation> reservationSet;
+
+  public Set<Reservation> getReservationSet() {
+    return reservationSet;
+  }
+
+  public void setReservationSet(Set<Reservation> reservationSet) {
+    this.reservationSet = reservationSet;
+  }
+
   public String getId() {
     return Id;
   }
