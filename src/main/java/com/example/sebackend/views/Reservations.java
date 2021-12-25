@@ -6,6 +6,7 @@ package com.example.sebackend.views;/**
 
 import lombok.Data;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -19,11 +20,11 @@ public class Reservations {
 
   private String doctorName;
 
-  private Integer number;
+  private String number;
 
   private Date reserveDate;
 
-  private Date reserveTime;
+  private Time reserveTime;
 
   private String patientId;
 

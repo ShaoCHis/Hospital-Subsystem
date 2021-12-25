@@ -26,3 +26,28 @@ Accept: application/json
 GET localhost:18080/api/hospitals/updateInfo/1
 content-type:application/json
 Accept: application/json
+
+
+###
+//获取就诊卡余额
+GET localhost:18080/api/patients/100
+content-type:application/json
+Accept:application/json
+
+
+###
+//更新预约信息
+POST localhost:18080/api/hospitals/updateReservation
+content-type:application/json
+Accept:application/json
+
+{
+  "departmentName":"眼科",
+  "doctorName":"王五",
+  "patientId":"100",
+  "patientName":"王五",
+  "reserveDate":"2021-10-10",
+  "reserveTime":"09:00:00",
+  "hospitalId":"1",
+  "number":"1010100"
+}

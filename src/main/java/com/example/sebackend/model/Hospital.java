@@ -47,9 +47,6 @@ public class Hospital {
   Set<Doctor> doctorSet;
 
   @OneToMany(mappedBy = "hospital",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
-  Set<Patient> patientSet;
-
-  @OneToMany(mappedBy = "hospital",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
   Set<Reservation> reservationSet;
 
   public Set<Reservation> getReservationSet() {
@@ -162,13 +159,5 @@ public class Hospital {
 
   public void setDoctorSet(Set<Doctor> doctorSet) {
     this.doctorSet = doctorSet;
-  }
-
-  public Set<Patient> getPatientSet() {
-    return patientSet;
-  }
-
-  public void setPatientSet(Set<Patient> patientSet) {
-    this.patientSet = patientSet;
   }
 }

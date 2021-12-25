@@ -56,10 +56,6 @@ public class HospitalService {
     /**
      * 将患者就诊卡信息加入返回内容
      */
-    Set<Patient> patientSet=hospitalOption.get().getPatientSet();
-    for(Patient patient:patientSet){
-      hospitalInfo.getPatientInfoList().add(new PatientInfo(patient));
-    }
     /**
      * 将科室与医生信息加入返回内容
      */
@@ -102,13 +98,6 @@ public class HospitalService {
       HospitalInfo hospitalInfo=new HospitalInfo(hospitalOption.get());
       hospitalRepository.save(hospitalOption.get());
       Set<Department> departmentSet=hospitalOption.get().getDepartmentSet();
-      /**
-       * 将患者就诊卡信息加入返回内容
-       */
-      Set<Patient> patientSet=hospitalOption.get().getPatientSet();
-      for(Patient patient:patientSet){
-        hospitalInfo.getPatientInfoList().add(new PatientInfo(patient));
-      }
       /**
        * 将科室与医生信息加入返回内容
        */

@@ -36,7 +36,7 @@ public class PatientInfo {
 
   public PatientInfo(Patient patient){
     this.type=0;
-    this.patientId=patient.getPatientId();
+    this.patientId=patient.getId();
     this.cardId=patient.getCardId();
     this.name=patient.getName();
     this.phoneNumber=patient.getPhoneNumber();

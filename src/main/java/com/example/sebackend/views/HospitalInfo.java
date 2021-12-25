@@ -60,6 +60,5 @@ public class HospitalInfo {
     this.notice=hospital.getNotice();
     this.status=1;
     this.departmentWithDoctors=new LinkedList<>();
-    this.patientInfoList=new LinkedList<>();
   }
 }

@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -28,11 +29,11 @@ public class Reservation {
 
   private String doctorName;
 
-  private Integer number;
+  private String number;
 
   private Date reserveDate;
 
-  private Date reserveTime;
+  private Time reserveTime;
 
   private String patientId;
 

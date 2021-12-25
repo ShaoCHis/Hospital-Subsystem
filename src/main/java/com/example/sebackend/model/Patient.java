@@ -16,8 +16,7 @@ import java.sql.Date;
 @Entity
 public class Patient {
   @Id
-  @Column(name = "patient_id")
-  private String patientId;
+  private String id;
 
   @Column(name = "card_id")
   private String cardId;
@@ -33,9 +32,13 @@ public class Patient {
 
   private Integer balance;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "hospital")
-  private Hospital hospital;
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
 
   public Integer getBalance() {
     return balance;
@@ -43,14 +46,6 @@ public class Patient {
 
   public void setBalance(Integer balance) {
     this.balance = balance;
-  }
-
-  public String getPatientId() {
-    return patientId;
-  }
-
-  public void setPatientId(String patientId) {
-    this.patientId = patientId;
   }
 
   public String getCardId() {
@@ -91,13 +86,5 @@ public class Patient {
 
   public void setBirthday(Date birthday) {
     this.birthday = birthday;
-  }
-
-  public Hospital getHospital() {
-    return hospital;
-  }
-
-  public void setHospital(Hospital hospital) {
-    this.hospital = hospital;
   }
 }

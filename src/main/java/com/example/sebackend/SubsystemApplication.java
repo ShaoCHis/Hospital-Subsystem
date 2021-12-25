@@ -19,10 +19,10 @@ public class SubsystemApplication {
   }
   public static void main(String[] args) {
     SpringApplication.run(SubsystemApplication.class, args);
-    try {
-      new NettyClient(12114).start();
-    }catch (Exception e){
-      System.out.println(e);
-    }
+//    try {
+//      new NettyClient(12114).start();
+//    }catch (Exception e){
+//      System.out.println(e);
+//    }
   }
 }
