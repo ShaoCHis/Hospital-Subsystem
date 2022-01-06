@@ -151,4 +151,14 @@ public class HospitalService {
       return Result.wrapErrorResult("No such reservation!");
     }
   }
+
+  public Result<String> updateNotice(Update body) {
+    Optional<Hospital> patientOptional=hospitalRepository.findById(body.getId());
+    if(!patientOptional.isPresent())
+      return Result.wrapErrorResult(new PatientNotExistedError());
+    Hospital hospital=patientOptional.get();
+    hospital.setNotice(body.getNotice());
+    hospitalRepository.save(hospital);
+    return Result.wrapSuccessfulResult("update Success!");
+  }
 }

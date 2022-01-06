@@ -12,6 +12,7 @@ import com.example.sebackend.utils.Result;
 import com.example.sebackend.views.CancelReservation;
 import com.example.sebackend.views.HospitalInfo;
 import com.example.sebackend.views.Reservations;
+import com.example.sebackend.views.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,5 +56,10 @@ public class HospitalController {
   @PostMapping(path = "/cancelReservatio")
   public Result<String> cancelReservation(@RequestBody CancelReservation body){
     return hospitalService.cancelReservation(body);
+  }
+
+  @PostMapping(path = "/updateNotice")
+  public Result<String> updateNotice(@RequestBody Update body){
+    return hospitalService.updateNotice(body);
   }
 }

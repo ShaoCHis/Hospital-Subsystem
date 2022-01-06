@@ -7,6 +7,9 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.CharsetUtil;
 import org.apache.tomcat.jni.Time;
+import java.util.*;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.apache.tomcat.jni.Time.sleep;
 
@@ -17,9 +20,22 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 	public void channelActive(ChannelHandlerContext ctx) {
 		//ctx.writeAndFlush(Unpooled.copiedBuffer("Hello Netty", CharsetUtil.UTF_8));
 		ctx.writeAndFlush(Unpooled.copiedBuffer("UpdateInformation", CharsetUtil.UTF_8));
+		try {
+			//睡眠5min
+			Thread.currentThread().sleep(1000*60*5);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		while (true){
-			ctx.writeAndFlush(Unpooled.copiedBuffer("UpdateInformation", CharsetUtil.UTF_8));
-			Time.sleep(1000);
+			ctx.writeAndFlush(Unpooled.copiedBuffer("UpdateInformation!", CharsetUtil.UTF_8));
+			try {
+				//睡眠5min
+				Thread.currentThread().sleep(1000*60*5);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println("发送请求");
 		}
 	}
